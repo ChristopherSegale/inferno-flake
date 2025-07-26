@@ -28,11 +28,10 @@ pkgs.stdenv.mkDerivation rec {
     mk mkdirs
     mk nuke
     mk install
-    export FIRSTLINE='/dis/sh.dis'
-    sed -i '1s/.*/"$FIRSTLINE"/' dis/{broke,lc,lookman,man,shutdown,sig}
+    sed -i '1s|.*|#!/dis/sh.dis|' dis/{broke,lc,lookman,man,shutdown,sig}
   '';
   installPhase = ''
-  mkdir -p $out/inferno
-  cp -r * $out/inferno
+    mkdir -p $out/inferno
+    cp -r * $out/inferno
   '';
 }
