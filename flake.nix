@@ -15,9 +15,12 @@
     inherit (pkgs) callPackage;
   in {
     packages = {
-      ${system}.default = callPackage ./package.nix { 
-        name = "inferno";
-        version = "4.0";
+      ${system} = rec {
+        inferno = callPackage ./package.nix { 
+          name = "inferno";
+          version = "4.0";
+        };
+        default = callPackage ./installer.nix { package = inferno; };
       };
     };
     devShells.${system}.default = callPackage ./shell.nix { };
